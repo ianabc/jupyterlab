@@ -17,7 +17,7 @@ from traitlets import Bool, Unicode
 from ._version import __version__
 from .extension import load_config, load_jupyter_server_extension
 from .commands import (
-    build, clean, get_app_dir, get_app_version, get_user_settings_dir,
+    build, clean, get_app_dir, get_app_run_dir, get_app_version, get_user_settings_dir,
     get_workspaces_dir
 )
 
@@ -296,7 +296,7 @@ class LabApp(NotebookApp):
     default_url = Unicode('/lab', config=True,
         help="The default URL to redirect to from `/`")
 
-    app_dir = Unicode(get_app_dir(), config=True,
+    app_dir = Unicode(get_app_run_dir(), config=True,
         help="The app directory to launch JupyterLab from.")
 
     user_settings_dir = Unicode(get_user_settings_dir(), config=True,

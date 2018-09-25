@@ -63,6 +63,16 @@ def get_workspaces_dir():
     return osp.realpath(workspaces_dir)
 
 
+def get_app_run_dir():
+    if os.environ.get('JUPYTERLAB_DIR'):
+        # Return the first existing lab path
+        labpaths = os.environ['JUPYTERLAB_DIR'].split(os.pathsep)
+        for labpath in labpaths:
+            if osp.exists(osp.join(labpath, 'static')):
+                return osp.realpath(labpath)
+    else:
+        return get_app_dir()
+
 def get_app_dir():
     """Get the configured JupyterLab app directory.
     """
@@ -71,7 +81,7 @@ def get_app_dir():
         # Return the first existing lab path
         labpaths = os.environ['JUPYTERLAB_DIR'].split(os.pathsep)
         for labpath in labpaths:
-            if osp.exists(osp.join(labpath, 'static')):
+            if osp.exists(labpath):
                 return osp.realpath(labpath)
 
 
