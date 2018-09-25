@@ -71,7 +71,7 @@ def get_app_dir():
         # Return the first existing lab path
         labpaths = os.environ['JUPYTERLAB_DIR'].split(os.pathsep)
         for labpath in labpaths:
-            if osp.exists(labpath):
+            if osp.exists(osp.join(labpath, 'static')):
                 return osp.realpath(labpath)
 
 
